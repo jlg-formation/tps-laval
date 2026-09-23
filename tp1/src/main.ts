@@ -33,16 +33,20 @@ const ui = setupUi({
   onDemo() {
     state.points = makeDemoPoints(W, H);
     perceptron.reset();
-    state.cursor = 0;
   },
   onReset() {
     state.points = [];
     perceptron.reset();
-    state.cursor = 0;
   },
   onToggleTraining() {
     state.training = !state.training;
     ui.refreshTraining();
+  },
+  onStep() {
+    // Mode pas-à-pas : une seule itération (une passe batch) par clic.
+    state.training = false;
+    ui.refreshTraining();
+    perceptron.trainEpoch(samples(), state.learningRate);
   },
 });
 
@@ -78,13 +82,11 @@ function step(): void {
   const data = samples();
 
   if (state.training && data.length > 0) {
-    // On applique plusieurs corrections par frame (réglé par le slider vitesse),
-    // en parcourant les exemples de façon cyclique. La droite se redessine donc
-    // à chaque frame : on voit la frontière converger pas à pas.
+    // Chaque frame applique plusieurs itérations batch (réglé par le slider) :
+    // à chaque itération on parcourt tous les points puis on met à jour la
+    // droite une seule fois. On voit ainsi la frontière converger.
     for (let i = 0; i < state.speed; i++) {
-      const sample = data[state.cursor % data.length]!;
-      perceptron.trainStep(sample, state.learningRate);
-      state.cursor++;
+      perceptron.trainEpoch(data, state.learningRate);
     }
   }
 

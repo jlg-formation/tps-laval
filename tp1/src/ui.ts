@@ -12,6 +12,7 @@ export interface UiHandlers {
   onDemo: () => void;
   onReset: () => void;
   onToggleTraining: () => void;
+  onStep: () => void;
 }
 
 function byId<T extends HTMLElement>(id: string): T {
@@ -32,6 +33,7 @@ export function setupUi(handlers: UiHandlers): Ui {
   const demoBtn = byId<HTMLButtonElement>("demo");
   const resetBtn = byId<HTMLButtonElement>("reset");
   const trainBtn = byId<HTMLButtonElement>("train");
+  const stepBtn = byId<HTMLButtonElement>("step");
   const speedInput = byId<HTMLInputElement>("speed");
   const speedVal = byId<HTMLElement>("speed-val");
   const lrInput = byId<HTMLInputElement>("lr");
@@ -47,6 +49,7 @@ export function setupUi(handlers: UiHandlers): Ui {
   demoBtn.addEventListener("click", handlers.onDemo);
   resetBtn.addEventListener("click", handlers.onReset);
   trainBtn.addEventListener("click", handlers.onToggleTraining);
+  stepBtn.addEventListener("click", handlers.onStep);
 
   speedInput.addEventListener("input", () => {
     state.speed = Number(speedInput.value);

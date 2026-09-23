@@ -55,6 +55,12 @@ un amas de points blancs, déjà séparables par une droite.
 
 - **Entraîner / Pause** : démarre ou suspend l'apprentissage. La droite rouge se
   redessine à chaque étape : on voit la frontière converger.
+- **Pas à pas** : exécute **une seule itération** par clic — idéal pour analyser
+  finement chaque mise à jour des poids.
+
+> **Qu'est-ce qu'une itération ?** Ici, une itération = une passe complète sur
+> **tous** les points : on accumule les corrections souhaitées, puis on applique
+> **une seule** mise à jour de la droite (descente de gradient *batch*).
 - **Vitesse** : nombre de corrections appliquées par image (animation plus ou
   moins rapide).
 - **Learning rate** : amplitude de chaque correction. Trop grand → ça oscille ;
@@ -89,20 +95,24 @@ L'apprentissage a réussi quand **Erreurs = 0**.
 
 ## Comment ça marche (sous le capot)
 
-À chaque étape, le perceptron examine un point, compare sa prédiction à la classe
-attendue, puis corrige ses paramètres :
+À chaque itération, le perceptron parcourt **tous** les points, accumule le
+gradient (la somme des corrections souhaitées), puis applique **une seule** mise
+à jour des paramètres — c'est la descente de gradient *batch* :
 
 ```text
-erreur = classe_attendue − sortie        (vaut -1, 0 ou +1)
-w1 += learning_rate × erreur × x
-w2 += learning_rate × erreur × y
-b  += learning_rate × erreur
+pour chaque point :  erreur = classe_attendue − sortie   (vaut -1, 0 ou +1)
+                     g_w1 += erreur × x
+                     g_w2 += erreur × y
+                     g_b  += erreur
+puis, une seule fois (N = nombre de points) :
+                     w1 += learning_rate × g_w1 / N
+                     w2 += learning_rate × g_w2 / N
+                     b  += learning_rate × g_b  / N
 ```
 
-Si la prédiction est correcte, `erreur = 0` et rien ne change. Sinon, la droite
-est poussée dans la bonne direction. Répété assez de fois sur des données
-séparables, cet algorithme **converge toujours** (théorème de convergence du
-perceptron).
+Si tous les points sont bien classés, le gradient est nul et rien ne change.
+Sinon, la droite est poussée dans la bonne direction. Répété assez de fois sur
+des données séparables, cet algorithme **converge** vers une frontière correcte.
 
 ## Organisation du code
 

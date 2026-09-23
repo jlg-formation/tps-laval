@@ -46,30 +46,52 @@ export class Perceptron {
   }
 
   /**
-   * Règle d'apprentissage du perceptron, sur UN exemple.
+   * Une ITÉRATION = une passe complète (batch) sur tous les échantillons.
    *
-   *   erreur = cible - sortie          (vaut -1, 0 ou +1)
-   *   wi    += lr * erreur * entrée_i
-   *   b     += lr * erreur
+   * On parcourt d'abord TOUS les points pour accumuler le gradient (la somme des
+   * corrections souhaitées), puis on applique UNE SEULE mise à jour des poids —
+   * c'est la descente de gradient « batch ».
    *
-   * Si la prédiction est correcte, erreur = 0 : rien ne bouge.
-   * Sinon on pousse la droite dans la bonne direction, proportionnellement au
-   * taux d'apprentissage `lr`.
+   *   pour chaque point :  erreur = cible - sortie
+   *                        g_w1 += erreur * x
+   *                        g_w2 += erreur * y
+   *                        g_b  += erreur
+   *   puis, une seule fois :
+   *                        w1 += lr * g_w1 / N
+   *                        w2 += lr * g_w2 / N
+   *                        b  += lr * g_b  / N
    *
-   * @returns true si l'exemple était mal classé (donc a provoqué une correction).
+   * On moyenne par N (nombre de points) pour que le taux d'apprentissage garde
+   * le même effet quel que soit le nombre d'échantillons.
+   *
+   * @returns true s'il restait au moins un point mal classé pendant la passe.
    */
-  trainStep(sample: TrainingSample, lr: number): boolean {
-    const output = this.predict(sample.x, sample.y);
-    const error = sample.label - output;
+  trainEpoch(samples: TrainingSample[], lr: number): boolean {
+    if (samples.length === 0) return false;
 
-    if (error !== 0) {
-      this.w1 += lr * error * sample.x;
-      this.w2 += lr * error * sample.y;
-      this.b += lr * error;
+    let gW1 = 0;
+    let gW2 = 0;
+    let gB = 0;
+    let errors = 0;
+
+    // Phase 1 : on parcourt tous les points et on accumule le gradient.
+    for (const s of samples) {
+      const output = this.predict(s.x, s.y);
+      const error = s.label - output;
+      if (error !== 0) errors++;
+      gW1 += error * s.x;
+      gW2 += error * s.y;
+      gB += error;
     }
 
+    // Phase 2 : une seule mise à jour des poids à partir du gradient accumulé.
+    const n = samples.length;
+    this.w1 += (lr * gW1) / n;
+    this.w2 += (lr * gW2) / n;
+    this.b += (lr * gB) / n;
+
     this.iterations++;
-    return error !== 0;
+    return errors > 0;
   }
 
   /** Compte combien d'exemples sont actuellement mal classés. */

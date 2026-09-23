@@ -13,9 +13,8 @@ export interface AppState {
   points: Point[];
   activeLabel: 0 | 1; // classe déposée au prochain clic
   learningRate: number;
-  speed: number; // nombre de pas d'apprentissage par frame
+  speed: number; // nombre d'itérations (passes batch) par frame
   training: boolean;
-  cursor: number; // index de l'exemple courant dans la boucle d'entraînement
 }
 
 export const state: AppState = {
@@ -24,7 +23,6 @@ export const state: AppState = {
   learningRate: 0.1,
   speed: 8,
   training: false,
-  cursor: 0,
 };
 
 /**

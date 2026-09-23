@@ -32,12 +32,15 @@
 
           <section>
             <h2>Entraînement</h2>
-            <button id="train" type="button">Entraîner</button>
+            <div class="row">
+              <button id="train" type="button">Entraîner</button>
+              <button id="step" type="button">Pas à pas</button>
+            </div>
 
             <label class="slider">
               Vitesse
               <input id="speed" type="range" min="1" max="50" step="1" value="8" />
-              <span id="speed-val">8</span> pas/frame
+              <span id="speed-val">8</span> itér./frame
             </label>
 
             <label class="slider">
