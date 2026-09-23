@@ -12,6 +12,11 @@ build/
 dist/
 *.egg-info/
 
+# Node / Bun
+node_modules/
+bun.lock
+bun.lockb
+
 # Cache uv
 .uv/
 

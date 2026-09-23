@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TP1 — Perceptron</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h1>Perceptron à 2 entrées</h1>
+      <p class="hint">
+        Clic sur une zone vide : ajoute un point de la classe active.
+        Clic sur un point : le supprime. Puis lance l'entraînement pour voir
+        la droite (frontière de décision) séparer les deux classes.
+      </p>
+
+      <div class="layout">
+        <canvas id="board" width="640" height="480"></canvas>
+
+        <aside class="panel">
+          <section>
+            <h2>Points</h2>
+            <button id="toggle-class" type="button">
+              Classe active : <strong id="active-class">Noir</strong>
+            </button>
+            <div class="row">
+              <button id="demo" type="button">Démo</button>
+              <button id="reset" type="button">Reset</button>
+            </div>
+          </section>
+
+          <section>
+            <h2>Entraînement</h2>
+            <button id="train" type="button">Entraîner</button>
+
+            <label class="slider">
+              Vitesse
+              <input id="speed" type="range" min="1" max="50" step="1" value="8" />
+              <span id="speed-val">8</span> pas/frame
+            </label>
+
+            <label class="slider">
+              Learning rate
+              <input id="lr" type="range" min="0.01" max="1" step="0.01" value="0.1" />
+              <span id="lr-val">0.10</span>
+            </label>
+          </section>
+
+          <section>
+            <h2>État du modèle</h2>
+            <table class="readouts">
+              <tbody>
+                <tr><td>w1</td><td id="w1">0.000</td></tr>
+                <tr><td>w2</td><td id="w2">0.000</td></tr>
+                <tr><td>b</td><td id="b">0.000</td></tr>
+                <tr><td>Itérations</td><td id="iter">0</td></tr>
+                <tr><td>Erreurs</td><td id="err">0</td></tr>
+              </tbody>
+            </table>
+          </section>
+        </aside>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
