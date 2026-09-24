@@ -6,6 +6,9 @@ venv/
 __pycache__/
 *.py[cod]
 *$py.class
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
 
 # Build / distribution
 build/
@@ -17,8 +20,22 @@ node_modules/
 bun.lock
 bun.lockb
 
+# TypeScript / Vite
+*.tsbuildinfo
+.vite/
+
 # Cache uv
 .uv/
 
+# Données et modèles
+data/
+*.onnx
+*.onnx.data
+
 # Fichiers d'environnement
 .env
+.env.*
+
+# IDE / OS
+.DS_Store
+Thumbs.db

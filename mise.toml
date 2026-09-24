@@ -5,3 +5,7 @@ bun = "1.4.2"
 [tasks.tp1]
 description = "Démarre le serveur de dev du TP1 (perceptron)"
 run = "bun run dev"
+
+[tasks.tp2]
+description = "Démarre le serveur de dev du TP2 (MLP sur MNIST)"
+run = "uv run tp2/main.py"
