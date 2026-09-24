@@ -4,7 +4,7 @@
 
 Le script Python [main.py](main.py) entraîne un perceptron multicouche (MLP) sur
 le jeu de données MNIST avec PyTorch, puis exporte le modèle entraîné au format
-**ONNX** (`mlp_mnist.onnx`, présent à la racine du workspace). L'objectif de ce
+**ONNX** (`model_mnist.onnx`, présent à la racine du workspace). L'objectif de ce
 TP est de **tester ce modèle dans un navigateur** : offrir une interface où un
 utilisateur dessine un chiffre à la main et voit en direct ce que le réseau
 reconnaît.
@@ -17,7 +17,7 @@ logique d'organisation mais utilise **Angular**.
 
 Construire une application web **Angular** qui :
 
-1. Charge le modèle `mlp_mnist.onnx` et l'exécute côté navigateur.
+1. Charge le modèle `model_mnist.onnx` et l'exécute côté navigateur.
 2. Fournit une zone de dessin (canvas) où l'utilisateur trace un chiffre à la
    souris.
 3. Affiche **en temps réel** le chiffre reconnu ainsi que la confiance du
@@ -27,7 +27,7 @@ Construire une application web **Angular** qui :
 
 ### Chargement et inférence du modèle
 
-- Le modèle `mlp_mnist.onnx` est **inclus dans le projet Angular** (copié dans
+- Le modèle `model_mnist.onnx` est **inclus dans le projet Angular** (copié dans
   les assets, servi statiquement) et chargé au démarrage de l'application.
 - L'inférence s'exécute **côté client avec `onnxruntime-web` en backend WASM**.
 - Entrée attendue par le modèle : un tenseur `1×1×28×28` de valeurs flottantes
@@ -88,7 +88,7 @@ desktop.
 - **Moteur d'inférence** : `onnxruntime-web` (backend **WASM**).
 - **Exécution du modèle** : entièrement **côté client**, aucun backend serveur
   d'inférence.
-- **Modèle** : `mlp_mnist.onnx`, entrée `1×1×28×28`, sortie 10 logits.
+- **Modèle** : `model_mnist.onnx`, entrée `1×1×28×28`, sortie 10 logits.
 
 ## Livraison / Exécution
 
@@ -106,7 +106,7 @@ desktop.
 
 ## Critères de succès
 
-1. L'application Angular démarre et charge `mlp_mnist.onnx` sans erreur.
+1. L'application Angular démarre et charge `model_mnist.onnx` sans erreur.
 2. L'utilisateur peut dessiner un chiffre à la souris sur le canvas.
 3. La prédiction s'affiche **automatiquement et en temps réel**.
 4. Le chiffre reconnu et les probabilités des 10 classes sont affichés.

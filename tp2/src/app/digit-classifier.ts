@@ -25,7 +25,7 @@ export class DigitClassifier {
       const ort = await import('onnxruntime-web/wasm');
       ort.env.wasm.wasmPaths = new URL('ort/', document.baseURI).href;
       ort.env.wasm.numThreads = 1;
-      const session = await ort.InferenceSession.create(new URL('mlp_mnist.onnx', document.baseURI).href);
+      const session = await ort.InferenceSession.create(new URL('model_mnist.onnx', document.baseURI).href);
       this.statusState.set('ready');
       return { ort, session };
     } catch (error) {

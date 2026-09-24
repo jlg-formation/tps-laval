@@ -11,20 +11,23 @@ import torch.nn as nn
 import torch.optim as optim
 from torchvision import datasets, transforms
 
-# Définir le MLP
-class MLP(nn.Module):
+# Définir le CNN
+
+class CNN(nn.Module):
     def __init__(self):
-        super(MLP, self).__init__()
-        self.flatten = nn.Flatten()
-        self.fc1 = nn.Linear(28*28, 128)
-        self.fc2 = nn.Linear(128, 64)
-        self.fc3 = nn.Linear(64, 10)
+        super(CNN, self).__init__()
+        self.conv1 = nn.Conv2d(1, 32, kernel_size=3, stride=1, padding=1)
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1)
+        self.pool = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)
+        self.fc1 = nn.Linear(64 * 14 * 14, 128)
+        self.fc2 = nn.Linear(128, 10)
 
     def forward(self, x):
-        x = self.flatten(x)
+        x = torch.relu(self.conv1(x))
+        x = self.pool(torch.relu(self.conv2(x)))
+        x = x.view(x.size(0), -1)
         x = torch.relu(self.fc1(x))
-        x = torch.relu(self.fc2(x))
-        x = self.fc3(x)
+        x = self.fc2(x)
         return x
 
 # Charger le dataset MNIST
@@ -34,7 +37,7 @@ train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=64, shuffle
 
 # Initialiser le modèle, la perte et l'optimiseur
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model = MLP().to(device)
+model = CNN().to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 

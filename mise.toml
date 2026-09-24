@@ -19,3 +19,9 @@ env = { PYTHONIOENCODING = "utf-8" }
 [tasks.tp2]
 description = "Démarre le serveur de dev du TP2 (reconnaissance de chiffres)"
 run = "bun run tp2:dev"
+
+[tasks.tp3-train]
+description = "Entraîne le CNN du TP3 sur MNIST et exporte le modèle ONNX"
+run = "uv run tp3/main.py"
+# L'exporteur ONNX de torch affiche des emojis, incompatibles avec cp1252 sous Windows.
+env = { PYTHONIOENCODING = "utf-8" }
