@@ -6,11 +6,33 @@
   "scripts": {
     "dev": "vite --config tp1/vite.config.ts",
     "build": "tsc && vite build --config tp1/vite.config.ts",
-    "preview": "vite preview --config tp1/vite.config.ts"
+    "preview": "vite preview --config tp1/vite.config.ts",
+    "ng": "cd tp2 && ng",
+    "tp2:ort": "bun tp2/scripts/copy-ort.ts",
+    "tp2:dev": "bun run tp2:ort && cd tp2 && ng serve",
+    "tp2:build": "bun run tp2:ort && cd tp2 && ng build"
+  },
+  "dependencies": {
+    "@angular/common": "^22.2.0",
+    "@angular/compiler": "^22.2.0",
+    "@angular/core": "^22.2.0",
+    "@angular/forms": "^22.2.0",
+    "@angular/platform-browser": "^22.2.0",
+    "@angular/router": "^22.2.0",
+    "onnxruntime-web": "^1.22.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "@angular/build": "^22.2.0",
+    "@angular/cli": "^22.2.0",
+    "@angular/compiler-cli": "^22.2.0",
+    "@tailwindcss/postcss": "^4.1.0",
     "@types/node": "^22.0.0",
-    "typescript": "^5.6.0",
+    "postcss": "^8.5.0",
+    "prettier": "^3.8.1",
+    "tailwindcss": "^4.1.0",
+    "typescript": "~6.0.2",
     "vite": "^6.0.0"
   }
 }

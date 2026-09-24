@@ -1,0 +1,33 @@
+<main class="mx-auto max-w-5xl p-8 text-slate-900">
+  <header class="mb-8">
+    <h1 class="text-3xl font-bold">TP2 — Reconnaissance de chiffres manuscrits</h1>
+    <p class="mt-2 text-slate-600">
+      Dessinez un chiffre à la souris : un MLP entraîné sur MNIST (ONNX, exécuté dans le navigateur) le reconnaît en
+      temps réel.
+    </p>
+  </header>
+
+  <div class="flex flex-wrap items-start gap-8">
+    <section aria-labelledby="draw-title" class="flex flex-col gap-3">
+      <h2 id="draw-title" class="font-semibold">Dessin</h2>
+      <app-drawing-pad #pad (changed)="onDrawn($event)" />
+      <button
+        type="button"
+        class="self-start rounded-md bg-slate-800 px-4 py-2 font-medium text-white hover:bg-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        (click)="clear(pad)"
+      >
+        Effacer
+      </button>
+    </section>
+
+    <section aria-labelledby="preview-title" class="flex flex-col gap-3">
+      <h2 id="preview-title" class="font-semibold">Vue du modèle (28×28)</h2>
+      <app-digit-preview [pixels]="pixels()" />
+    </section>
+
+    <section aria-labelledby="result-title" class="min-w-64 flex-1">
+      <h2 id="result-title" class="mb-3 font-semibold">Résultat</h2>
+      <app-prediction-panel [status]="status()" [probabilities]="probabilities()" />
+    </section>
+  </div>
+</main>

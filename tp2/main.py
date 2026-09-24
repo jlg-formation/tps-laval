@@ -1,4 +1,5 @@
 import torch
+from pathlib import Path
 
 print(torch.__version__)
 
@@ -59,4 +60,7 @@ for epoch in range(5):
 # Sauvegarder le modèle en mode ONNX
 model.eval()  # Mettre le modèle en mode évaluation avant de l'exporter en ONNX
 dummy_input = torch.randn(1, 1, 28, 28).to(device)
-torch.onnx.export(model, dummy_input, "mlp_mnist.onnx", input_names=['input'], output_names=['output'])
+# Exporté dans public/ pour être servi par l'application Angular.
+onnx_path = Path(__file__).parent / "public" / "mlp_mnist.onnx"
+onnx_path.parent.mkdir(parents=True, exist_ok=True)
+torch.onnx.export(model, dummy_input, str(onnx_path), input_names=['input'], output_names=['output'], external_data=False)

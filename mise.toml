@@ -6,6 +6,12 @@ bun = "1.4.2"
 description = "Démarre le serveur de dev du TP1 (perceptron)"
 run = "bun run dev"
 
-[tasks.tp2]
-description = "Démarre le serveur de dev du TP2 (MLP sur MNIST)"
+[tasks.tp2-train]
+description = "Entraîne le MLP du TP2 sur MNIST et exporte le modèle ONNX"
 run = "uv run tp2/main.py"
+# L'exporteur ONNX de torch affiche des emojis, incompatibles avec cp1252 sous Windows.
+env = { PYTHONIOENCODING = "utf-8" }
+
+[tasks.tp2]
+description = "Démarre le serveur de dev du TP2 (reconnaissance de chiffres)"
+run = "bun run tp2:dev"
