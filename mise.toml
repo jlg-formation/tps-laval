@@ -25,3 +25,17 @@ description = "Entraîne le CNN du TP3 sur MNIST et exporte le modèle ONNX"
 run = "uv run tp3/main.py"
 # L'exporteur ONNX de torch affiche des emojis, incompatibles avec cp1252 sous Windows.
 env = { PYTHONIOENCODING = "utf-8" }
+
+[tasks.tp4-data]
+description = "Génère les tickets bruts du TP4, puis les analyse et les nettoie"
+run = ["uv run tp4/generate_data.py", "uv run tp4/analyse.py"]
+env = { PYTHONIOENCODING = "utf-8" }
+
+[tasks.tp4-train]
+description = "Entraîne le RNN du TP4 (options : --window, --cell, --hidden, --epochs, --lr)"
+run = "uv run tp4/train.py"
+env = { PYTHONIOENCODING = "utf-8" }
+
+[tasks.tp4]
+description = "Démarre le serveur de dev du TP4 (prévision des tickets)"
+run = "bun run tp4:dev"

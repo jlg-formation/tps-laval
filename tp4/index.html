@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TP4 — Prévision des tickets de la DSI</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h1>Prévision des tickets de la DSI</h1>
+      <p class="hint">
+        Saisissez le nombre de tickets reçus les derniers jours : le réseau récurrent,
+        exécuté dans le navigateur avec ONNX Runtime Web, prévoit ceux du lendemain.
+      </p>
+      <p id="status" role="status">Chargement du modèle…</p>
+
+      <div class="layout">
+        <form id="form" class="panel">
+          <h2>Tickets des derniers jours</h2>
+          <div id="fields" class="fields"></div>
+          <button type="submit" disabled>Prédire</button>
+          <output id="result" class="result" aria-live="polite"></output>
+        </form>
+
+        <section class="panel wide" aria-labelledby="chart-title">
+          <h2 id="chart-title">Période de test : réel vs prédit</h2>
+          <canvas id="chart" width="900" height="360" role="img"
+            aria-label="Nombre de tickets réels et prédits sur la période de test"></canvas>
+          <table class="metrics">
+            <thead>
+              <tr><th scope="col">Méthode</th><th scope="col">MAE</th><th scope="col">RMSE</th></tr>
+            </thead>
+            <tbody id="metrics"></tbody>
+          </table>
+          <p class="hint">
+            MAE : erreur moyenne en tickets. RMSE : pénalise davantage les grosses erreurs.
+          </p>
+        </section>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

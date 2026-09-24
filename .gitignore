@@ -29,6 +29,9 @@ node_modules/
 data/
 *.onnx
 *.onnx.data
+*.pth
+tp4/public/ticket-rnn.json
+tp4/public/ort/
 
 # Fichiers d'environnement
 .env

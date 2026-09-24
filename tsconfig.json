@@ -12,5 +12,5 @@
     "skipLibCheck": true,
     "types": ["vite/client", "node"]
   },
-  "include": ["tp1/src", "tp1/vite.config.ts"]
+  "include": ["tp1/src", "tp1/vite.config.ts", "tp4/src", "tp4/vite.config.ts", "tp4/scripts"]
 }
