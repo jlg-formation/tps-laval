@@ -11,7 +11,7 @@ import { ClassifierStatus } from './digit-classifier';
       }
       @case ('error') {
         <p class="text-red-700" role="alert">
-          Impossible de charger le modèle. Lancez d'abord <code>mise run tp2-train</code>.
+          Impossible de charger le modèle. Lancez d'abord <code>mise run tp2-train</code> ou <code>mise run tp3-train</code>.
         </p>
       }
       @default {
