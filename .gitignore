@@ -17,8 +17,6 @@ dist/
 
 # Node / Bun
 node_modules/
-bun.lock
-bun.lockb
 
 # TypeScript / Vite
 *.tsbuildinfo
