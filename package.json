@@ -16,7 +16,10 @@
     "tp4:build": "bun run tp4:ort && tsc && vite build --config tp4/vite.config.ts",
     "tp5:ort": "bun tp5/scripts/copy-ort.ts",
     "tp5:dev": "bun run tp5:ort && vite --config tp5/vite.config.ts",
-    "tp5:build": "bun run tp5:ort && tsc && vite build --config tp5/vite.config.ts"
+    "tp5:build": "bun run tp5:ort && tsc && vite build --config tp5/vite.config.ts",
+    "tp6:ort": "bun tp6/scripts/copy-ort.ts",
+    "tp6:dev": "bun run tp6:ort && vite --config tp6/vite.config.ts",
+    "tp6:build": "bun run tp6:ort && tsc && vite build --config tp6/vite.config.ts"
   },
   "dependencies": {
     "@angular/common": "^22.2.0",

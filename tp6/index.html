@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TP6 — Explorer l'espace latent d'un VAE</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h1>Explorer l'espace latent d'un VAE</h1>
+      <p class="hint">
+        Chaque position du plan est un code latent (z₁, z₂). Déplacez le point à la souris, au doigt
+        ou aux flèches du clavier (Maj pour aller plus vite) : le décodeur, exécuté dans le navigateur
+        avec ONNX Runtime Web, génère le chiffre correspondant.
+      </p>
+      <p id="status" role="status">Chargement du modèle…</p>
+
+      <div class="layout">
+        <section class="panel" aria-labelledby="plane-title">
+          <h2 id="plane-title">Plan latent</h2>
+          <canvas id="plane" class="plane" width="480" height="480" tabindex="0"
+            aria-label="Plan latent : déplacez le point avec la souris ou les flèches du clavier"
+            aria-describedby="coords"></canvas>
+          <fieldset class="background">
+            <legend>Fond</legend>
+            <label><input type="radio" name="background" value="scatter" checked disabled /> Nuage du test</label>
+            <label><input type="radio" name="background" value="grid" disabled /> Grille décodée</label>
+          </fieldset>
+          <ul id="legend" class="legend" aria-label="Couleur de chaque chiffre"></ul>
+        </section>
+
+        <section class="panel" aria-labelledby="result-title">
+          <h2 id="result-title">Chiffre généré (28×28)</h2>
+          <canvas id="digit" class="digit" width="28" height="28"></canvas>
+          <p class="coords">
+            <output id="coords">z = (0,00 ; 0,00)</output>
+          </p>
+        </section>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

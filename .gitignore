@@ -33,6 +33,8 @@ data/
 tp4/public/ticket-rnn.json
 tp4/public/ort/
 tp5/public/ort/
+tp6/public/ort/
+tp6/public/latent-points.json
 
 # Fichiers d'environnement
 .env

@@ -48,3 +48,12 @@ env = { PYTHONIOENCODING = "utf-8" }
 [tasks.tp5]
 description = "Démarre le serveur de dev du TP5 (débruitage de chiffres dessinés)"
 run = "bun run tp5:dev"
+
+[tasks.tp6-train]
+description = "Entraîne le VAE à latent 2D du TP6 (options : --epochs, --batch, --lr, --beta, --seed)"
+run = "uv run tp6/train.py"
+env = { PYTHONIOENCODING = "utf-8" }
+
+[tasks.tp6]
+description = "Démarre le serveur de dev du TP6 (exploration de l'espace latent)"
+run = "bun run tp6:dev"
