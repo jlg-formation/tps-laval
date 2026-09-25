@@ -24,7 +24,9 @@
     "tp7:dev": "bun run tp7:ort && vite --config tp7/vite.config.ts",
     "tp7:build": "bun run tp7:ort && tsc && vite build --config tp7/vite.config.ts",
     "tp8:dev": "vite --config tp8/vite.config.ts",
-    "tp8:build": "tsc && vite build --config tp8/vite.config.ts"
+    "tp8:build": "tsc && vite build --config tp8/vite.config.ts",
+    "tp9:dev": "vite --config tp9/vite.config.ts",
+    "tp9:build": "tsc && vite build --config tp9/vite.config.ts"
   },
   "dependencies": {
     "@angular/common": "^22.2.0",
@@ -33,6 +35,7 @@
     "@angular/forms": "^22.2.0",
     "@angular/platform-browser": "^22.2.0",
     "@angular/router": "^22.2.0",
+    "@tensorflow/tfjs": "^4.22.0",
     "onnxruntime-web": "^1.22.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"

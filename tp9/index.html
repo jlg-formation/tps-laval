@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TP9 — DQN sur Breakout</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h1>Deep Q-Network : un agent apprend à jouer à Breakout</h1>
+      <p class="hint">
+        L'état (balle, raquette, 60 briques) est trop riche pour une table Q : un réseau de neurones
+        65 → 128 → 128 → 3 estime Q(s, a) pour les 3 actions. L'agent apprend dans le navigateur à partir de
+        ses propres parties, grâce à un replay buffer et à un réseau cible. Lancez l'entraînement, passez en
+        turbo, puis regardez-le jouer en démo ou mesurez-vous à lui en mode humain.
+      </p>
+
+      <div class="layout">
+        <section class="panel" aria-labelledby="game-title">
+          <h2 id="game-title">Jeu</h2>
+          <canvas id="game"></canvas>
+          <dl class="counters">
+            <div><dt>Épisode</dt><dd id="c-episode">1</dd></div>
+            <div><dt>Pas total</dt><dd id="c-steps">0</dd></div>
+            <div><dt>ε courant</dt><dd id="c-epsilon">1</dd></div>
+            <div><dt>Replay buffer</dt><dd id="c-buffer">0</dd></div>
+            <div><dt>Meilleur score</dt><dd id="c-best">—</dd></div>
+            <div><dt>Moyenne 20 dern.</dt><dd id="c-mean">—</dd></div>
+            <div><dt>Baseline aléatoire</dt><dd id="c-baseline">…</dd></div>
+            <div><dt>Dernière partie</dt><dd id="c-last">—</dd></div>
+            <div class="tech"><dt>Backend TF.js</dt><dd id="c-backend">…</dd></div>
+            <div class="tech"><dt>Tenseurs</dt><dd id="c-tensors">—</dd></div>
+          </dl>
+        </section>
+
+        <div class="side">
+          <section class="panel" aria-labelledby="mode-title">
+            <h2 id="mode-title">Mode</h2>
+            <div class="buttons" role="group" aria-label="Mode">
+              <button id="mode-train" type="button" class="secondary" aria-pressed="true">Entraînement</button>
+              <button id="mode-demo" type="button" class="secondary" aria-pressed="false">Démo</button>
+              <button id="mode-human" type="button" class="secondary" aria-pressed="false">Humain</button>
+            </div>
+            <p id="mode-hint" class="small"></p>
+          </section>
+
+          <section class="panel" aria-labelledby="train-title">
+            <h2 id="train-title">Contrôles</h2>
+            <div class="buttons">
+              <button id="play" type="button">▶ Lecture</button>
+              <button id="turbo" type="button" class="secondary" aria-pressed="false">Turbo</button>
+              <button id="reset" type="button" class="secondary">Reset</button>
+            </div>
+            <div id="speed-slot"></div>
+          </section>
+
+          <section class="panel" aria-labelledby="q-title">
+            <h2 id="q-title">Q-valeurs de l'état courant</h2>
+            <canvas id="q-bars" width="420" height="150"></canvas>
+          </section>
+
+          <section class="panel" aria-labelledby="model-title">
+            <h2 id="model-title">Modèle</h2>
+            <div class="buttons">
+              <button id="save-local" type="button" class="secondary">Sauver (navigateur)</button>
+              <button id="load-local" type="button" class="secondary">Charger (navigateur)</button>
+              <button id="export" type="button" class="secondary">Exporter</button>
+              <button id="import" type="button" class="secondary">Importer…</button>
+              <button id="pretrained" type="button" class="secondary">Modèle pré-entraîné</button>
+            </div>
+            <input id="import-files" type="file" accept=".json,.bin" multiple hidden />
+            <p id="model-status" class="small" role="status"></p>
+          </section>
+
+          <section class="panel" aria-labelledby="params-title">
+            <h2 id="params-title">Hyperparamètres</h2>
+            <div id="params"></div>
+            <button id="defaults" type="button" class="secondary">Valeurs par défaut</button>
+          </section>
+        </div>
+      </div>
+
+      <section class="panel charts" aria-labelledby="charts-title">
+        <h2 id="charts-title">Apprentissage</h2>
+        <canvas id="chart-score" width="1200" height="240"></canvas>
+        <canvas id="chart-loss" width="1200" height="200"></canvas>
+      </section>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

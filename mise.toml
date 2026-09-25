@@ -70,3 +70,7 @@ run = "bun run tp7:dev"
 [tasks.tp8]
 description = "Démarre le serveur de dev du TP8 (Q-learning dans un labyrinthe)"
 run = "bun run tp8:dev"
+
+[tasks.tp9]
+description = "Démarre le serveur de dev du TP9 (DQN sur Breakout)"
+run = "bun run tp9:dev"
