@@ -9,6 +9,8 @@ export const ACTION_REPEAT = 4;
 export const BUFFER_SIZE = 50_000;
 export const BATCH_SIZE = 64;
 export const WARMUP = 1_000;
+/** Une descente de gradient toutes les TRAIN_EVERY décisions (4 comme le DQN Atari) : 4× moins de calcul. */
+export const TRAIN_EVERY = 4;
 const LOSS_POINTS = 1_000;
 
 export type Mode = "train" | "demo" | "human";
@@ -127,7 +129,7 @@ export class Trainer {
     // Vie perdue = état terminal pour la cible (astuce DQN Atari) ; la troncature, elle, garde γ·max Q(s', ·).
     this.buffer.push(this.obs, this.action, this.reward, this.nextObs, r.lifeLost || r.terminal);
     this.agent.countStep();
-    if (this.buffer.size < WARMUP) return;
+    if (this.buffer.size < WARMUP || this.agent.steps % TRAIN_EVERY !== 0) return;
     this.agent.learn(this.buffer.sample());
     if (this.agent.updates % LOSS_EVERY === 0) this.losses.add(this.agent.lastLoss);
   }

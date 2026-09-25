@@ -1,0 +1,6 @@
+
+============================
+Hi, looks like you are running TensorFlow.js in Node.js. To speed things up dramatically, install our node backend, visit https://github.com/tensorflow/tfjs-node for more details. 
+============================
+ep 20 steps 3406 eps 0.84 mean20 4.2 loss 3.08e-2 112 s (30 dec/s) tensors 26
+ep 40 steps 6525 eps 0.69 mean20 4.0 loss 1.96e-3 248 s (26 dec/s) tensors 26

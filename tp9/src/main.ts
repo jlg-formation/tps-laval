@@ -3,7 +3,7 @@ import { ACTION_NAMES, PADDLE_SPEED, type Action } from "./breakout";
 import { drawCurve, drawQBars, meanOfLast } from "./chart";
 import { DqnAgent, argmax, type DqnParams } from "./dqn";
 import { GameRenderer } from "./renderer";
-import { ACTION_REPEAT, BUFFER_SIZE, Trainer, WARMUP, randomBaseline, type EpisodeResult, type Mode } from "./training";
+import { ACTION_REPEAT, BUFFER_SIZE, TRAIN_EVERY, Trainer, WARMUP, randomBaseline, type EpisodeResult, type Mode } from "./training";
 
 const DEFAULT_PARAMS: DqnParams = {
   learningRate: 1e-3,
@@ -20,7 +20,7 @@ const STORAGE_URL = "localstorage://tp9-dqn";
 const PRETRAINED_URL = `${import.meta.env.BASE_URL}model/model.json`;
 const MODE_LABELS: Record<Mode, string> = { train: "entraînement", demo: "démo", human: "humain" };
 const MODE_HINTS: Record<Mode, string> = {
-  train: `L'agent joue en ε-greedy et apprend à chaque décision (une décision tous les ${ACTION_REPEAT} pas de physique).`,
+  train: `L'agent joue en ε-greedy et apprend en continu (une décision tous les ${ACTION_REPEAT} pas de physique, une mise à jour du réseau toutes les ${TRAIN_EVERY} décisions).`,
   demo: "L'agent joue en greedy (ε = 0), sans apprendre ni remplir le replay buffer.",
   human:
     "Flèches ← → ou souris sur le jeu. Votre partie ne nourrit pas le replay buffer ; les barres montrent ce que l'agent ferait.",
@@ -58,6 +58,7 @@ const counters = {
   last: el("c-last"),
   backend: el("c-backend"),
   tensors: el("c-tensors"),
+  rate: el("c-rate"),
 };
 
 const renderer = new GameRenderer(gameCanvas);
@@ -334,12 +335,22 @@ function render(): void {
   const last = trainer.lastEpisode;
   counters.last.textContent = last ? `${last.score} (${MODE_LABELS[last.mode]}${last.truncated ? ", tronqué" : ""})` : "—";
   counters.tensors.textContent = integer(tf.memory().numTensors);
+  updateRate();
 
   if (scores.length !== chartedEpisodes || trainer.losses.values.length !== chartedLosses) {
     drawCharts();
     chartedEpisodes = scores.length;
     chartedLosses = trainer.losses.values.length;
   }
+}
+
+let rateMark = { time: 0, steps: 0 };
+function updateRate(): void {
+  const now = performance.now();
+  if (now - rateMark.time < 1000) return;
+  const rate = ((agent.steps - rateMark.steps) * 1000) / (now - rateMark.time);
+  counters.rate.textContent = running && trainer.mode === "train" ? integer(Math.round(rate)) : "—";
+  rateMark = { time: now, steps: agent.steps };
 }
 
 function frame(now: number): void {
