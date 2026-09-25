@@ -1,0 +1,1 @@
+Je voudrais que tu fasses un TP pour le TP 8 sur le réinforcement learning (RL). Je voudrais que tu fasses juste un site web qui fait le problème du labyrinthe. Je te laisse, on va détailler ensemble. 

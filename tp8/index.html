@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TP8 — Q-learning dans un labyrinthe</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h1>Q-learning : un agent apprend à sortir d'un labyrinthe</h1>
+      <p class="hint">
+        L'agent (rond rouge) part de S et cherche la sortie G. Il ne connaît pas le plan : il essaie
+        des actions, reçoit des récompenses et met à jour sa table Q(s, a). La couleur de chaque case
+        montre V(s) = max Q(s, ·), la flèche montre l'action qu'il choisirait. Survolez une case pour
+        voir ses 4 valeurs Q.
+      </p>
+
+      <div class="layout">
+        <section class="panel" aria-labelledby="maze-title">
+          <h2 id="maze-title">Labyrinthe</h2>
+          <div class="maze-wrap">
+            <canvas id="maze"></canvas>
+            <div id="tooltip" class="tooltip" hidden></div>
+          </div>
+          <div class="legend">
+            <span>V(s)</span>
+            <span id="v-min">—</span>
+            <div id="gradient" class="gradient"></div>
+            <span id="v-max">—</span>
+          </div>
+          <dl class="counters">
+            <div><dt>Épisode</dt><dd id="c-episode">1</dd></div>
+            <div><dt>Pas (épisode en cours)</dt><dd id="c-steps">0</dd></div>
+            <div><dt>ε courant</dt><dd id="c-epsilon">1</dd></div>
+            <div><dt>Dernier épisode</dt><dd id="c-last">—</dd></div>
+            <div><dt>Plus court chemin</dt><dd id="c-optimal">—</dd></div>
+          </dl>
+        </section>
+
+        <div class="side">
+          <section class="panel" aria-labelledby="train-title">
+            <h2 id="train-title">Entraînement</h2>
+            <div class="buttons">
+              <button id="play" type="button">▶ Lecture</button>
+              <button id="step" type="button" class="secondary">Pas à pas</button>
+              <button id="turbo" type="button" class="secondary" aria-pressed="false">Turbo</button>
+              <button id="reset" type="button" class="secondary">Reset</button>
+            </div>
+            <div id="speed-slot"></div>
+          </section>
+
+          <section class="panel" aria-labelledby="transition-title">
+            <h2 id="transition-title">Dernière transition (pas à pas)</h2>
+            <pre id="transition" class="transition">Cliquez sur « Pas à pas » pour voir le détail d'une mise à jour de Q.</pre>
+          </section>
+
+          <section class="panel" aria-labelledby="env-title">
+            <h2 id="env-title">Environnement</h2>
+            <div id="size-slot"></div>
+            <button id="new-maze" type="button" class="secondary">Nouveau labyrinthe</button>
+          </section>
+
+          <section class="panel" aria-labelledby="params-title">
+            <h2 id="params-title">Hyperparamètres</h2>
+            <div id="params"></div>
+            <h3>Récompenses</h3>
+            <div id="rewards"></div>
+            <button id="defaults" type="button" class="secondary">Valeurs par défaut</button>
+          </section>
+        </div>
+      </div>
+
+      <section class="panel charts" aria-labelledby="charts-title">
+        <h2 id="charts-title">Convergence</h2>
+        <canvas id="chart-steps" width="1200" height="220"></canvas>
+        <canvas id="chart-reward" width="1200" height="200"></canvas>
+      </section>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

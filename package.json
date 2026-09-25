@@ -22,7 +22,9 @@
     "tp6:build": "bun run tp6:ort && tsc && vite build --config tp6/vite.config.ts",
     "tp7:ort": "bun tp7/scripts/copy-ort.ts",
     "tp7:dev": "bun run tp7:ort && vite --config tp7/vite.config.ts",
-    "tp7:build": "bun run tp7:ort && tsc && vite build --config tp7/vite.config.ts"
+    "tp7:build": "bun run tp7:ort && tsc && vite build --config tp7/vite.config.ts",
+    "tp8:dev": "vite --config tp8/vite.config.ts",
+    "tp8:build": "tsc && vite build --config tp8/vite.config.ts"
   },
   "dependencies": {
     "@angular/common": "^22.2.0",

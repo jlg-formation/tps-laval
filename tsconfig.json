@@ -12,5 +12,5 @@
     "skipLibCheck": true,
     "types": ["vite/client", "node"]
   },
-  "include": ["tp1/src", "tp1/vite.config.ts", "tp4/src", "tp4/vite.config.ts", "tp4/scripts", "tp5/src", "tp5/vite.config.ts", "tp5/scripts", "tp6/src", "tp6/vite.config.ts", "tp6/scripts", "tp7/src", "tp7/vite.config.ts", "tp7/scripts"]
+  "include": ["tp1/src", "tp1/vite.config.ts", "tp4/src", "tp4/vite.config.ts", "tp4/scripts", "tp5/src", "tp5/vite.config.ts", "tp5/scripts", "tp6/src", "tp6/vite.config.ts", "tp6/scripts", "tp7/src", "tp7/vite.config.ts", "tp7/scripts", "tp8/src", "tp8/vite.config.ts"]
 }
