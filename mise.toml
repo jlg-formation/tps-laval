@@ -39,3 +39,12 @@ env = { PYTHONIOENCODING = "utf-8" }
 [tasks.tp4]
 description = "Démarre le serveur de dev du TP4 (prévision des tickets)"
 run = "bun run tp4:dev"
+
+[tasks.tp5-train]
+description = "Entraîne le VAE débruiteur du TP5 (options : --epochs, --batch, --lr, --latent, --beta)"
+run = "uv run tp5/train.py"
+env = { PYTHONIOENCODING = "utf-8" }
+
+[tasks.tp5]
+description = "Démarre le serveur de dev du TP5 (débruitage de chiffres dessinés)"
+run = "bun run tp5:dev"

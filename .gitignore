@@ -32,6 +32,7 @@ data/
 *.pth
 tp4/public/ticket-rnn.json
 tp4/public/ort/
+tp5/public/ort/
 
 # Fichiers d'environnement
 .env

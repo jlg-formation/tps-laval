@@ -1,0 +1,1 @@
+Alors, je voudrais faire en deep learning, avec Python et PyTorch, un VAE, un variational autoencoder (je crois qu'il s'appelle comme ça). Le but du jeu, c'est qu'il enlève du bruit à des chiffres du MNIST. Voilà, on va détailler ça ensemble. 

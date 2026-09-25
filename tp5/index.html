@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TP5 — Débruitage de chiffres avec un VAE</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h1>Débruitage de chiffres avec un VAE</h1>
+      <p class="hint">
+        Dessinez un chiffre, ajoutez du bruit : l'autoencodeur variationnel, exécuté dans le
+        navigateur avec ONNX Runtime Web, reconstruit le chiffre propre en temps réel.
+      </p>
+      <p id="status" role="status">Chargement du modèle…</p>
+
+      <div class="layout">
+        <section class="panel" aria-labelledby="draw-title">
+          <h2 id="draw-title">Dessin</h2>
+          <canvas id="pad" class="pad" width="280" height="280"
+            aria-label="Zone de dessin : tracez un chiffre de 0 à 9"></canvas>
+          <button id="clear" type="button" disabled>Effacer</button>
+        </section>
+
+        <section class="panel noise" aria-labelledby="noise-title">
+          <h2 id="noise-title">Bruit</h2>
+          <div class="noise-row">
+            <button id="add-gauss" type="button" disabled>+ Gaussien</button>
+            <output id="level-gauss">σ = 0,00</output>
+          </div>
+          <div class="noise-row">
+            <button id="add-salt-pepper" type="button" disabled>+ Poivre et sel</button>
+            <output id="level-salt-pepper">0 %</output>
+          </div>
+          <div class="noise-row">
+            <button id="add-blocks" type="button" disabled>+ Occlusion</button>
+            <output id="level-blocks">0 bloc</output>
+          </div>
+          <button id="remove-noise" type="button" class="secondary" disabled>Retirer le bruit</button>
+        </section>
+
+        <section class="panel" aria-labelledby="result-title">
+          <h2 id="result-title">Résultat (28×28)</h2>
+          <div class="previews">
+            <figure>
+              <canvas id="clean" class="preview" width="28" height="28"></canvas>
+              <figcaption>Propre</figcaption>
+            </figure>
+            <figure>
+              <canvas id="noisy" class="preview" width="28" height="28"></canvas>
+              <figcaption>Bruité</figcaption>
+            </figure>
+            <figure>
+              <canvas id="denoised" class="preview" width="28" height="28"></canvas>
+              <figcaption>Débruité</figcaption>
+            </figure>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
