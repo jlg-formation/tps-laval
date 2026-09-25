@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TP7 — Générer des chiffres avec un GAN</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h1>Générer des chiffres avec un GAN</h1>
+      <p class="hint">
+        Chaque case est produite par le générateur à partir d'un bruit aléatoire z tiré d'une loi
+        normale. Le générateur, exécuté dans le navigateur avec ONNX Runtime Web, n'a jamais vu
+        d'image MNIST : il a seulement appris à tromper le discriminateur.
+      </p>
+      <p id="status" role="status">Chargement du modèle…</p>
+
+      <section class="panel" aria-labelledby="grid-title">
+        <h2 id="grid-title">Chiffres générés (8 × 8)</h2>
+        <canvas id="grid" class="grid" width="224" height="224"></canvas>
+        <button id="generate" type="button" disabled>Générer</button>
+      </section>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

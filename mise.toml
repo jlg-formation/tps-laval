@@ -57,3 +57,12 @@ env = { PYTHONIOENCODING = "utf-8" }
 [tasks.tp6]
 description = "Démarre le serveur de dev du TP6 (exploration de l'espace latent)"
 run = "bun run tp6:dev"
+
+[tasks.tp7-train]
+description = "Entraîne le GAN du TP7 (options : --epochs, --batch, --lr, --latent, --seed)"
+run = "uv run tp7/train.py"
+env = { PYTHONIOENCODING = "utf-8" }
+
+[tasks.tp7]
+description = "Démarre le serveur de dev du TP7 (génération de chiffres par un GAN)"
+run = "bun run tp7:dev"
